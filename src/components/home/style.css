@@ -1,28 +1,45 @@
+@font-face {
+    font-family: futura;
+    src: url("./fonts/FUTURA.ttf");
+}
+
 #cursor {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
+    /* permet de center le default cursor au millieu du custom */
     margin-top: -40px;
     margin-left: -40px;
     width: 80px;
     height: 80px;
     z-index: 1;
-    text-align: center;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
+    pointer-events: none;
 }
 
 #circle {
-    display: block;
-    position: relative;
-    margin: auto;
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 60px;
     height: 60px;
-
     background-color: rgba(0, 0, 20, 0.5);
     border-radius: 50%;
     box-shadow: 0px 0px 10px 4px rgba(255, 255, 255, 1);
 }
+
+.cursor-hover {
+    animation: spin 10s infinite;
+    transition: all 0.3s ease-in-out;
+}
+
+.cursor-hover.hide {
+    opacity: 0;
+    animation: none;
+}
+
 
 .earth {
     width: 200px;
@@ -30,7 +47,7 @@
     background-size: cover;
     border: 2px solid #000;
     border-radius: 50%;
-    animation: movimiento 120s linear 0s infinite;
+    animation: move 200s linear 0s infinite;
     box-shadow: 0 0 25px RGBA(255, 255, 255, 0.10),
         -8px -8px 15px #000 inset,
         2px 2px 25px #000 inset,
@@ -39,32 +56,62 @@
     transform: rotateX(6deg) rotateY(6deg) rotateZ(0deg);
 }
 
-.orbit {
+
+.outer-orbit,
+.middle-orbit,
+.inner-orbit {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 300px;
-    height: 300px;
-    border: 2px dashed rgb(189, 189, 189);
+    width: 215px;
+    height: 215px;
+    border: 1px solid rgb(129, 129, 129);
     border-radius: 50%;
     animation: spin 200s infinite;
+}
+
+.outer-orbit {
+    width: 280px;
+    height: 280px;
+    border: 2px dashed rgb(129, 129, 129);
+}
+
+.middle-orbit {
+    width: 260px;
+    height: 260px;
+    border: 2px dotted rgb(129, 129, 129);
+}
+
+
+.planet {
+    height: fit-content;
+}
+
+.pop-up {
+    background-color: rgba(1, 5, 8, 0.7);
+    transition: opacity 0.2s ease-in-out;
+    position: absolute;
+}
+
+.pop-up.hide {
+    opacity: 0;
 }
 
 .space {
     display: flex;
     justify-content: center;
     height: 100vh;
-    background-color: #050f10;
+    background: radial-gradient(#29393b, #010508);
     cursor: none;
 }
 
-@keyframes movimiento {
+@keyframes move {
     0% {
         background-position: 0 0
     }
 
     100% {
-        background-position: 355px 0
+        background-position: 315px 0
     }
 }
 
