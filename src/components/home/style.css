@@ -30,6 +30,13 @@
     box-shadow: 0px 0px 10px 4px rgba(255, 255, 255, 1);
 }
 
+.map {
+    background-image: url('./img/map.jpg');
+    background-size: cover;
+    width: 120vw;
+    height: 120vh;
+}
+
 .cursor-hover {
     animation: spin 10s infinite;
     transition: all 0.3s ease-in-out;
@@ -44,6 +51,8 @@
 .earth {
     width: 200px;
     height: 200px;
+    background-image: url('./img/earth.png');
+    background-color: rgb(62, 62, 62);
     background-size: cover;
     border: 2px solid #000;
     border-radius: 50%;
@@ -56,6 +65,23 @@
     transform: rotateX(6deg) rotateY(6deg) rotateZ(0deg);
 }
 
+.fade-out {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    background-color: black;
+    animation-name: fadeIn;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    z-index: 1;
+}
+
+.icon {
+    width: 75px;
+    height: 75px
+}
 
 .outer-orbit,
 .middle-orbit,
@@ -70,12 +96,6 @@
     animation: spin 200s infinite;
 }
 
-.outer-orbit {
-    width: 280px;
-    height: 280px;
-    border: 2px dashed rgb(129, 129, 129);
-}
-
 .middle-orbit {
     width: 260px;
     height: 260px;
@@ -83,7 +103,14 @@
 }
 
 
+.outer-orbit {
+    width: 280px;
+    height: 280px;
+    border: 2px dashed rgb(129, 129, 129);
+}
+
 .planet {
+    width: fit-content;
     height: fit-content;
 }
 
@@ -103,6 +130,16 @@
     height: 100vh;
     background: radial-gradient(#29393b, #010508);
     cursor: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes move {

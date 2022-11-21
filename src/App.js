@@ -12,11 +12,9 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div className="">
+        <div className="Container">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-            {/* <Route path="*" element={<PageNotFound />} /> */}
           </Routes>
         </div>
       </Router>
