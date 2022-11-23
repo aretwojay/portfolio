@@ -1,25 +1,31 @@
-@font-face {
-    font-family: futura;
-    src: url("./fonts/FUTURA.ttf");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Lexend:wght@300&display=swap');
+
+a {
+    cursor: none;
 }
 
-#cursor {
+.cursor {
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
+    width: 80px;
+    height: 80px;
     /* permet de center le default cursor au millieu du custom */
     margin-top: -40px;
     margin-left: -40px;
-    width: 80px;
-    height: 80px;
     z-index: 1;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     pointer-events: none;
+    transition: transform 0.2s ease-in-out;
 }
 
-#circle {
+.cursor.hover {
+    transform: scale(0.8);
+}
+
+.circle {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,13 +34,6 @@
     background-color: rgba(0, 0, 20, 0.5);
     border-radius: 50%;
     box-shadow: 0px 0px 10px 4px rgba(255, 255, 255, 1);
-}
-
-.map {
-    background-image: url('./img/map.jpg');
-    background-size: cover;
-    width: 120vw;
-    height: 120vh;
 }
 
 .cursor-hover {
@@ -78,9 +77,33 @@
     z-index: 1;
 }
 
+.navbar {
+    position: fixed;
+    top: 0;
+}
+
 .icon {
-    width: 75px;
-    height: 75px
+    padding: 2px;
+    width: 65px;
+    height: 65px;
+    filter: invert(1);
+}
+
+.icon-container {
+    border: 2px solid #fff;
+    transition: all 0.25s ease-in-out;
+}
+
+.icon-container.hover {
+    border-width: 1;
+    transform: scale(1.2);
+    box-shadow: 0px 0px 10px 4px rgb(247, 247, 247);
+}
+
+.pop-up .icon {
+    width: 60px;
+    height: 60px;
+    border: none;
 }
 
 .outer-orbit,
@@ -94,6 +117,14 @@
     border: 1px solid rgb(129, 129, 129);
     border-radius: 50%;
     animation: spin 200s infinite;
+}
+
+.map {
+    background-image: url('./img/map.jpg');
+    width: 2048px;
+    height: 1536px;
+    transform: translateY(-30%);
+
 }
 
 .middle-orbit {
@@ -115,13 +146,40 @@
 }
 
 .pop-up {
+    max-width: 300px;
     background-color: rgba(1, 5, 8, 0.7);
+    border-top: 5px solid rgb(255, 140, 0);
     transition: opacity 0.2s ease-in-out;
     position: absolute;
 }
 
 .pop-up.hide {
     opacity: 0;
+}
+
+.project-details {
+    list-style: none;
+}
+
+.project-details li::before {
+    content: "» ";
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin-left: 50px;
+    margin-bottom: 150px;
+    margin-right: -100px;
+}
+
+.sidebar h2 {
+    border-top: 1px solid #c8c5c5;
+    border-bottom: 1px solid #c8c5c5;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+
 }
 
 .space {
@@ -132,12 +190,19 @@
     cursor: none;
 }
 
+.space-around {
+    margin: 3px;
+    padding: 2px;
+}
+
 @keyframes fadeIn {
     from {
+        z-index: 1;
         opacity: 1;
     }
 
     to {
+        z-index: 0;
         opacity: 0;
     }
 }

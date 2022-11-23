@@ -3,36 +3,32 @@ import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse
 import Icon from "./Icon";
 import "./style.css";
 
-const Earth = ({ isPressed, setIsPressed, isHover, setIsHover, cursorPos }) => {
+const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
 
     const ref = useRef(null)
-    const [mapSize, setMapSize] = useState([]);
 
-    const showModal = () => {
-        setIsHover(true);
-    }
+    const [isHover, setIsHover] = useState(false);
 
     const nextPage = () => {
         setIsPressed(true);
         setIsHover(false);
     }
 
+    const goBack = () => {
+        setIsPressed(false);
+        setIsHover(false);
+    }
+
     useEffect(() => {
-        if (isPressed) {
-            ref.current.scrollIntoView({
-                block: 'center',
-            });
-        }
-    })
-
-
+        cursorHover(isHover)
+    }, [isHover]);
 
     return (
         <div className="Container">
             {!isPressed ?
                 <div className="planet pt-5"
                     onClick={() => nextPage()}
-                    onMouseOver={(e) => showModal()}
+                    onMouseOver={() => setIsHover(true)}
                     onMouseOut={() => setIsHover(false)}
                 >
 
@@ -55,7 +51,7 @@ const Earth = ({ isPressed, setIsPressed, isHover, setIsHover, cursorPos }) => {
                         </MouseParallaxChild>
                     </MouseParallaxContainer>
 
-                    <div className={`${isHover ? "pop-up" : "pop-up hide"} p-3 border-top border-3 text-light`}
+                    <div className={`${isHover ? "pop-up" : "pop-up hide"} p-3 border-top border-5 text-light`}
                         style={{ left: cursorPos[0] + 50 + "px", top: cursorPos[1] + 30 + "px", }}
                     >
                         <h6 className="text-uppercase">
@@ -75,17 +71,49 @@ const Earth = ({ isPressed, setIsPressed, isHover, setIsHover, cursorPos }) => {
                     globalFactorX={0.2}
                     globalFactorY={0.2}
                 >
+                    <p
+                        onClick={() => goBack()}
+                        onMouseOver={() => setIsHover(true)}
+                        onMouseOut={() => setIsHover(false)}
+                        className="position-fixed text-light"
+                        style={{ top: 0, left: 0, zIndex: 2 }}
+                    >
+                        Go Back
+                    </p>
                     <MouseParallaxChild factorX={0.3} factorY={0.5}>
 
-                        <img
+                        <div
                             ref={ref}
-                            className="map"
-                        />
-                        <Icon
-                            url="project-icon.svg"
-                            x="500px"
-                            y="400px"
-                        />
+                            className="map position-relative"
+                        >
+                            <Icon
+                                cursorHover={cursorHover}
+                                url="project-icon.svg"
+                                title="my_irc"
+                                date="Novembre 2022"
+                                description="A socket web app based on Node.JS, React.JS and Express."
+                                type="Level 20 Story"
+                                difficulty="Hard"
+                                details={["1-3 players", "Cooperative"]}
+                                iconX={570}
+                                iconY={950}
+                                bgColor={"#7e4d35"}
+                            />
+                            <Icon
+                                cursorHover={cursorHover}
+                                url="raid-icon.svg"
+                                title="apprenticeship"
+                                date="Coming soon"
+                                description="A new experience."
+                                type="Level 26 Raid"
+                                difficulty="???"
+                                details={["+6 Players", "Cooperative", "Monthly Rewards"]}
+                                iconX={1200}
+                                iconY={750}
+                                bgColor={"#7e4d35"}
+                            />
+                        </div>
+
 
                     </MouseParallaxChild>
                 </MouseParallaxContainer>
