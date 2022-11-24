@@ -1,7 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Lexend:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Lexend:wght@300&display=swap');
 
 a {
     cursor: none;
+}
+
+.Container {
+    cursor: none !important;
+    background-color: #000;
 }
 
 .cursor {
@@ -18,11 +23,11 @@ a {
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     pointer-events: none;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 300ms ease-in-out;
 }
 
 .cursor.hover {
-    transform: scale(0.8);
+    transform: scale(0.75);
 }
 
 .circle {
@@ -65,21 +70,63 @@ a {
 }
 
 .fade-out {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     width: 100vw;
     background-color: black;
-    animation-name: fadeIn;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-    z-index: 1;
+    z-index: 999999;
+}
+
+.fade-enter {
+    opacity: 1;
+}
+
+.fade-exit {
+    opacity: 0;
+    transition: opacity 500ms linear;
+}
+
+.hide {
+    opacity: 0;
 }
 
 .navbar {
-    position: fixed;
-    top: 0;
+    font-family: 'Inter', sans-serif;
+    z-index: 0;
+}
+
+.navbar span {
+    position: relative;
+    border: 1px solid rgba(200, 197, 197, 0.5);
+    padding: 5px 40px;
+}
+
+.navbar span:after {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    content: '';
+    height: 100%;
+    transition: all 200ms linear;
+    width: 100%;
+    border-bottom: 3px solid #fff;
+    transform: scaleX(0);
+}
+
+.navbar span:hover {
+    color: #fff !important;
+    transition: color 500ms ease-in-out;
+}
+
+.navbar span.active:after {
+    transform: scale(1);
+}
+
+
+.navbar span.active {
+    transform: scaleX(1);
+    transition: all 300ms ease-in-out;
 }
 
 .icon {
@@ -124,7 +171,6 @@ a {
     width: 2048px;
     height: 1536px;
     transform: translateY(-30%);
-
 }
 
 .middle-orbit {
@@ -140,21 +186,41 @@ a {
     border: 2px dashed rgb(129, 129, 129);
 }
 
+.page {
+    opacity: 1;
+    transition: all 500ms ease-in-out;
+}
+
+.page.hidden {
+    height: 0;
+    opacity: 0;
+    transform: scaleZ(0);
+}
+
 .planet {
+    position: absolute;
     width: fit-content;
     height: fit-content;
 }
 
 .pop-up {
+    position: fixed;
     max-width: 300px;
     background-color: rgba(1, 5, 8, 0.7);
     border-top: 5px solid rgb(255, 140, 0);
     transition: opacity 0.2s ease-in-out;
-    position: absolute;
+    z-index: 2;
 }
 
 .pop-up.hide {
     opacity: 0;
+}
+
+.profile {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: radial-gradient(#292b2b, #010508);
 }
 
 .project-details {
@@ -172,6 +238,7 @@ a {
     margin-left: 50px;
     margin-bottom: 150px;
     margin-right: -100px;
+    z-index: 0;
 }
 
 .sidebar h2 {
@@ -179,15 +246,15 @@ a {
     border-bottom: 1px solid #c8c5c5;
     letter-spacing: 1px;
     font-family: 'Inter', sans-serif;
-
+    font-weight: 800;
 }
 
 .space {
+    position: relative;
     display: flex;
     justify-content: center;
     height: 100vh;
     background: radial-gradient(#29393b, #010508);
-    cursor: none;
 }
 
 .space-around {
@@ -197,13 +264,12 @@ a {
 
 @keyframes fadeIn {
     from {
-        z-index: 1;
         opacity: 1;
     }
 
     to {
-        z-index: 0;
         opacity: 0;
+        z-index: 0;
     }
 }
 

@@ -1,33 +1,66 @@
+import Map from "./Map";
+import NavItem from "./NavItem";
+import Profile from "./Profile";
 import React, { useState, useRef, useEffect } from "react";
-import { MouseParallax } from "react-just-parallax";
 import { Github, Linkedin } from 'react-bootstrap-icons';
-import Earth from "./Earth";
+import { CSSTransition } from 'react-transition-group';
 import "./style.css";
 
 const Home = () => {
-
     const [cursorPos, setCursorPos] = useState([]);
     const [isHover, setIsHover] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
     const [isFadeVisible, setIsFadeVisible] = useState(false);
+    const [activePage, setActivePage] = useState("map");
+    const nodeRef = useRef(null);
+
+    const iconInfos = [
+        { url: "https://github.com/aretwojay", component: <Github size={30} className="m-2" /> },
+        { url: "https://www.linkedin.com/in/ruben-kabanga-muya-8ba864209/", component: <Linkedin size={30} className="m-2" /> },
+    ]
+
+    const order = [
+        {
+            name: "map", component:
+                <Map
+                    isPressed={isPressed}
+                    setIsPressed={setIsPressed}
+                    cursorHover={setIsHover}
+                    cursorPos={cursorPos}
+                />,
+        },
+        {
+            name: "profile", component:
+                <Profile
+                    isPressed={isPressed}
+                    setIsPressed={setIsPressed}
+                    cursorHover={setIsHover}
+                    cursorPos={cursorPos}
+                />,
+
+        }
+    ]
 
     const customCursor = (e) => {
         setCursorPos([e.clientX, e.clientY]);
+    }
+
+    const changePage = (name) => {
+        setActivePage(name);
+        console.log(activePage);
     }
 
     useEffect(() => {
         setIsFadeVisible(true);
         setTimeout(() => {
             setIsFadeVisible(false);
-        }, 1500);
+        }, 100);
     }, [isPressed])
 
     return (
-        <div
-            className="space"
-            onMouseMove={(e) => customCursor(e)}>
-            {isFadeVisible && <div className="fade-out" />}
-
+        <div className="Container"
+            onMouseMove={(e) => customCursor(e)}
+        >
             <div
                 className={`${isHover ? "cursor hover" : "cursor"}`}
                 style={{
@@ -42,41 +75,65 @@ const Home = () => {
                 </div>
             </div>
 
+
+            <CSSTransition
+                classNames="fade"
+                nodeRef={nodeRef}
+                in={isFadeVisible}
+                timeout={300}
+                unmountOnExit
+            >
+                <div ref={nodeRef} className="fade-out" />
+            </CSSTransition>
+
             {
                 !isPressed &&
-                <div className="navbar text-light">
-                    <span>Main Menu</span>
+                <div className="navbar px-5 fixed-top text-uppercase text-light vw-100">
+                    {["profile", "map", "settings"].map((val, i) => {
+                        return (
+                            <NavItem
+                                key={i}
+                                onClick={() => changePage(val)}
+                                activePage={activePage}
+                                cursorHover={setIsHover}
+                                content={val}
+                            />
+                        )
+
+                    })}
+
                 </div>
             }
 
+            {order.map((page, i) => {
+                return (
+                    <div
+                        className={`${page.name === activePage ? "page" : "page hidden"}`}
+                        key={i}>
+                        {page.component}
+                    </div>
+                )
+            })}
 
 
-            <Earth
-                isPressed={isPressed}
-                setIsPressed={setIsPressed}
-                cursorHover={setIsHover}
-                cursorPos={cursorPos}
-            />
 
-            <aside className="sidebar text-light text-uppercase">
-                <a className="text-reset"
-                    onMouseOver={() => setIsHover(true)}
-                    onMouseOut={() => setIsHover(false)}
-                    href="https://github.com/aretwojay"
-                >
-                    <Github className="m-2" size={30} />
-                </a>
-                <a className="text-reset"
-                    onMouseOver={() => setIsHover(true)}
-                    onMouseOut={() => setIsHover(false)}
-                    href="https://www.linkedin.com/in/ruben-kabanga-muya-8ba864209/"
-                >
-                    <Linkedin className="m-2" size={30} />
-                </a>
-                <h2>Solar system</h2>
-            </aside >
-
-
+            {
+                activePage === "map" && isPressed === false && <aside className="sidebar text-light text-uppercase">
+                    {iconInfos.map((icon, i) => {
+                        return (
+                            <a
+                                key={i}
+                                className="text-reset"
+                                onMouseOver={() => setIsHover(true)}
+                                onMouseOut={() => setIsHover(false)}
+                                href={icon.url}
+                            >
+                                {icon.component}
+                            </a>)
+                    })}
+                    <h2>Solar system</h2>
+                </aside >
+            }
 
 
         </div >

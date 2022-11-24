@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse";
+import { Mouse } from 'react-bootstrap-icons';
 import Icon from "./Icon";
 import "./style.css";
 
@@ -26,10 +27,17 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     return (
         <div className="Container">
             {!isPressed ?
-                <div className="planet pt-5"
+                <div className="planet"
                     onClick={() => nextPage()}
                     onMouseOver={() => setIsHover(true)}
                     onMouseOut={() => setIsHover(false)}
+                    style={{
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        bottom: "50px",
+                        left: 0,
+                        right: 0,
+                    }}
                 >
 
 
@@ -71,15 +79,6 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                     globalFactorX={0.2}
                     globalFactorY={0.2}
                 >
-                    <p
-                        onClick={() => goBack()}
-                        onMouseOver={() => setIsHover(true)}
-                        onMouseOut={() => setIsHover(false)}
-                        className="position-fixed text-light"
-                        style={{ top: 0, left: 0, zIndex: 2 }}
-                    >
-                        Go Back
-                    </p>
                     <MouseParallaxChild factorX={0.3} factorY={0.5}>
 
                         <div
@@ -90,7 +89,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                                 cursorHover={cursorHover}
                                 url="project-icon.svg"
                                 title="my_irc"
-                                date="Novembre 2022"
+                                date="November 2022"
                                 description="A socket web app based on Node.JS, React.JS and Express."
                                 type="Level 20 Story"
                                 difficulty="Hard"
@@ -116,6 +115,19 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
 
 
                     </MouseParallaxChild>
+                    <footer
+                        style={{ bottom: "1000px", right: "500px", zIndex: 2 }}
+                    >
+                        <p
+                            onClick={() => goBack()}
+                            onMouseOver={() => setIsHover(true)}
+                            onMouseOut={() => setIsHover(false)}
+                            className="position-fixed text-light"
+                        >
+                            Go Back
+                        </p>
+                    </footer>
+
                 </MouseParallaxContainer>
 
 
