@@ -3,19 +3,34 @@ import React, { useState, useRef, useEffect } from "react";
 const Icon = ({ cursorHover, project }) => {
 
     const [isHover, setIsHover] = useState(false);
+    const [isPressed, setIsPressed] = useState(false);
 
     const handleHover = () => {
         setIsHover(!isHover);
         cursorHover(!isHover);
     }
 
+    const handleClick = () => {
+        setIsPressed(false);
+        setIsHover(false);
+        cursorHover(false);
+    }
+
+    const redirect = (url) => {
+        window.location.href = url;
+    }
+
     return (
         <div>
+            <div
+                className={`${isPressed ? "img-modal" : "img-modal hidden"}`}>
+                <img onClick={() => handleClick()} src={require('./img/' + project.title + '.png')} />
+            </div>
             {/* pop up when hover the icon */}
-            <div className={`${isHover ? "pop-up " : "pop-up hide"} p-3 pt-2 text-light`}
+            <div className={`${isHover && !isPressed ? "pop-up " : "pop-up hide"} p-3 pt-2 text-light`}
                 style={{ left: project.iconX + 100 + "px", top: project.iconY - 100 + "px" }}
             >
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center mb-1">
                     <img
                         className="icon"
                         src={require(`./img/${project.url}`)}
@@ -30,7 +45,7 @@ const Icon = ({ cursorHover, project }) => {
 
                 </div>
 
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between" style={{ fontWeight: 600 }}>
                     <span>{project.type}</span>
                     <span className="text-muted">{project.difficulty}</span>
                 </div>
@@ -46,7 +61,10 @@ const Icon = ({ cursorHover, project }) => {
                 </ul>
             </div>
             {/* icon displayed on the map */}
-            <div className={`${isHover ? "icon-container hover" : "icon-container"} position-absolute rounded-circle`} style={{ left: project.iconX, top: project.iconY }}>
+            <div className={`${isHover && !isPressed ? "icon-container hover" : "icon-container"} position-absolute rounded-circle`}
+                style={{ left: project.iconX, top: project.iconY }}
+                onClick={() => setIsPressed(true)}
+            >
                 <div className="rounded-circle space-around"
 
                     style={{ backgroundColor: project.bgColor }}>
@@ -59,10 +77,6 @@ const Icon = ({ cursorHover, project }) => {
                     />
                 </div>
             </div>
-
-            {/* <div className="h-100 w-100 text-light position-absolute pointer-events-none">
-                <p>Hello</p>
-            </div> */}
 
 
         </div >

@@ -9,7 +9,6 @@ const Home = () => {
     const [isHover, setIsHover] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
     const [activePage, setActivePage] = useState("map");
-    const nodeRef = useRef(null);
 
     const pageOrder = [
         {

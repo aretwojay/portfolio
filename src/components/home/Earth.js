@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse";
-import { Mouse, ArrowLeftSquareFill } from 'react-bootstrap-icons';
+import { ArrowLeftSquareFill } from 'react-bootstrap-icons';
 import Icon from "./Icon";
 import Map from "./img/map.jpg";
 import "./style.css";
@@ -14,10 +14,11 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     const projectInfos = [
         {
             url: "project-icon.svg",
+            urlRedirect: "https://stackblitz.com/edit/my-irc",
             title: "my_irc",
             date: "November 2022",
             description: "A socket web app based on Node.JS, React.JS and Express.",
-            type: "Level 20 Story",
+            type: "Level 20 Strike",
             difficulty: "Hard",
             details: ["1-3 players", "Cooperative"],
             iconX: 570,
@@ -26,12 +27,12 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
         },
         {
             url: "raid-icon.svg",
-            title: "apprenticeship",
-            date: "Coming soon",
-            description: "A new experience.",
-            type: "Level 26 Raid",
-            difficulty: "???",
-            details: ["+6 Players", "Cooperative", "Monthly Rewards"],
+            title: "connect-4",
+            date: "July 2022",
+            description: "The Connect-4 game adapted in Javascript.",
+            type: "Level 9 Story",
+            difficulty: "Easy",
+            details: ["1 Player", "Exploration"],
             iconX: 1200,
             iconY: 750,
             bgColor: "#7e4d35"
@@ -53,7 +54,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     }, [isHover]);
 
     return (
-        <div className="section">
+        <div className="section text-light">
             {!isPressed ?
                 <div className="planet"
                     onClick={() => nextPage()}
@@ -62,7 +63,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                     style={{
                         marginLeft: "auto",
                         marginRight: "auto",
-                        bottom: "50px",
+                        bottom: "150px",
                         left: 0,
                         right: 0,
                     }}
@@ -76,6 +77,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                         globalFactorY={0.2}
                     >
                         <MouseParallaxChild factorX={0.3} factorY={0.5}>
+                            <h2 className="planet-title text-center">PROJECTS</h2>
                             <div className="outer-orbit">
                                 <div className="middle-orbit">
                                     <div className="inner-orbit">
@@ -87,13 +89,13 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                         </MouseParallaxChild>
                     </MouseParallaxContainer>
 
-                    <div className={`${isHover ? "pop-up" : "pop-up hide"} p-3 border-top border-5 text-light`}
+                    <div className={`${isHover ? "pop-up" : "pop-up hide"} p-3 border-top border-5`}
                         style={{ left: cursorPos[0] + 50 + "px", top: cursorPos[1] + 30 + "px", }}
                     >
                         <h6 className="text-uppercase">
-                            Mes projets
+                            PROJECTS
                         </h6>
-                        <p className="fst-italic">Retrouvez quelques-uns de mes projets les plus aboutis.</p>
+                        <p className="fst-italic">Discover my most succeeded projects.</p>
                     </div>
 
 
@@ -120,7 +122,6 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                                             key={i}
                                             cursorHover={cursorHover}
                                             project={project}
-
                                         />
                                     )
                                 })
@@ -131,7 +132,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
 
                     </MouseParallaxChild>
                     <footer
-                        className="p-2 d-flex align-items-center position-fixed text-light"
+                        className="p-2 d-flex align-items-center position-fixed"
                         style={{ top: 0, left: 0 }}
                     >
                         <ArrowLeftSquareFill color="white" />
