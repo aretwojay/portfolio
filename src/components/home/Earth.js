@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MouseParallaxContainer, MouseParallaxChild } from "react-parallax-mouse";
-import { Mouse } from 'react-bootstrap-icons';
+import { Mouse, ArrowLeftSquareFill } from 'react-bootstrap-icons';
 import Icon from "./Icon";
+import Map from "./img/map.jpg";
 import "./style.css";
 
 const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
@@ -9,6 +10,33 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     const ref = useRef(null)
 
     const [isHover, setIsHover] = useState(false);
+
+    const projectInfos = [
+        {
+            url: "project-icon.svg",
+            title: "my_irc",
+            date: "November 2022",
+            description: "A socket web app based on Node.JS, React.JS and Express.",
+            type: "Level 20 Story",
+            difficulty: "Hard",
+            details: ["1-3 players", "Cooperative"],
+            iconX: 570,
+            iconY: 950,
+            bgColor: "#7e4d35",
+        },
+        {
+            url: "raid-icon.svg",
+            title: "apprenticeship",
+            date: "Coming soon",
+            description: "A new experience.",
+            type: "Level 26 Raid",
+            difficulty: "???",
+            details: ["+6 Players", "Cooperative", "Monthly Rewards"],
+            iconX: 1200,
+            iconY: 750,
+            bgColor: "#7e4d35"
+        }
+    ]
 
     const nextPage = () => {
         setIsPressed(true);
@@ -25,7 +53,7 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     }, [isHover]);
 
     return (
-        <div className="Container">
+        <div className="section">
             {!isPressed ?
                 <div className="planet"
                     onClick={() => nextPage()}
@@ -85,44 +113,33 @@ const Earth = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                             ref={ref}
                             className="map position-relative"
                         >
-                            <Icon
-                                cursorHover={cursorHover}
-                                url="project-icon.svg"
-                                title="my_irc"
-                                date="November 2022"
-                                description="A socket web app based on Node.JS, React.JS and Express."
-                                type="Level 20 Story"
-                                difficulty="Hard"
-                                details={["1-3 players", "Cooperative"]}
-                                iconX={570}
-                                iconY={950}
-                                bgColor={"#7e4d35"}
-                            />
-                            <Icon
-                                cursorHover={cursorHover}
-                                url="raid-icon.svg"
-                                title="apprenticeship"
-                                date="Coming soon"
-                                description="A new experience."
-                                type="Level 26 Raid"
-                                difficulty="???"
-                                details={["+6 Players", "Cooperative", "Monthly Rewards"]}
-                                iconX={1200}
-                                iconY={750}
-                                bgColor={"#7e4d35"}
-                            />
+                            {
+                                projectInfos.map((project, i) => {
+                                    return (
+                                        <Icon
+                                            key={i}
+                                            cursorHover={cursorHover}
+                                            project={project}
+
+                                        />
+                                    )
+                                })
+                            }
+
                         </div>
 
 
                     </MouseParallaxChild>
                     <footer
-                        style={{ bottom: "1000px", right: "500px", zIndex: 2 }}
+                        className="p-2 d-flex align-items-center position-fixed text-light"
+                        style={{ top: 0, left: 0 }}
                     >
+                        <ArrowLeftSquareFill color="white" />
                         <p
+                            className="ms-1 mb-0"
                             onClick={() => goBack()}
                             onMouseOver={() => setIsHover(true)}
                             onMouseOut={() => setIsHover(false)}
-                            className="position-fixed text-light"
                         >
                             Go Back
                         </p>

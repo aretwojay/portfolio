@@ -1,25 +1,17 @@
 import Map from "./Map";
 import NavItem from "./NavItem";
-import Profile from "./Profile";
+import About from "./About";
 import React, { useState, useRef, useEffect } from "react";
-import { Github, Linkedin } from 'react-bootstrap-icons';
-import { CSSTransition } from 'react-transition-group';
 import "./style.css";
 
 const Home = () => {
     const [cursorPos, setCursorPos] = useState([]);
     const [isHover, setIsHover] = useState(false);
     const [isPressed, setIsPressed] = useState(false);
-    const [isFadeVisible, setIsFadeVisible] = useState(false);
     const [activePage, setActivePage] = useState("map");
     const nodeRef = useRef(null);
 
-    const iconInfos = [
-        { url: "https://github.com/aretwojay", component: <Github size={30} className="m-2" /> },
-        { url: "https://www.linkedin.com/in/ruben-kabanga-muya-8ba864209/", component: <Linkedin size={30} className="m-2" /> },
-    ]
-
-    const order = [
+    const pageOrder = [
         {
             name: "map", component:
                 <Map
@@ -30,8 +22,8 @@ const Home = () => {
                 />,
         },
         {
-            name: "profile", component:
-                <Profile
+            name: "about", component:
+                <About
                     isPressed={isPressed}
                     setIsPressed={setIsPressed}
                     cursorHover={setIsHover}
@@ -50,15 +42,8 @@ const Home = () => {
         console.log(activePage);
     }
 
-    useEffect(() => {
-        setIsFadeVisible(true);
-        setTimeout(() => {
-            setIsFadeVisible(false);
-        }, 100);
-    }, [isPressed])
-
     return (
-        <div className="Container"
+        <div className="index user-select-none"
             onMouseMove={(e) => customCursor(e)}
         >
             <div
@@ -75,37 +60,23 @@ const Home = () => {
                 </div>
             </div>
 
+            <div className={`${isPressed ? "hidden" : ""} navbar px-5 fixed-top text-uppercase text-light vw-100`}>
+                {pageOrder.map((page, i) => {
+                    return (
+                        <NavItem
+                            key={i}
+                            onClick={() => changePage(page.name)}
+                            activePage={activePage}
+                            cursorHover={setIsHover}
+                            content={page.name}
+                        />
+                    )
 
-            <CSSTransition
-                classNames="fade"
-                nodeRef={nodeRef}
-                in={isFadeVisible}
-                timeout={300}
-                unmountOnExit
-            >
-                <div ref={nodeRef} className="fade-out" />
-            </CSSTransition>
+                })}
 
-            {
-                !isPressed &&
-                <div className="navbar px-5 fixed-top text-uppercase text-light vw-100">
-                    {["profile", "map", "settings"].map((val, i) => {
-                        return (
-                            <NavItem
-                                key={i}
-                                onClick={() => changePage(val)}
-                                activePage={activePage}
-                                cursorHover={setIsHover}
-                                content={val}
-                            />
-                        )
+            </div>
 
-                    })}
-
-                </div>
-            }
-
-            {order.map((page, i) => {
+            {pageOrder.map((page, i) => {
                 return (
                     <div
                         className={`${page.name === activePage ? "page" : "page hidden"}`}
@@ -115,26 +86,9 @@ const Home = () => {
                 )
             })}
 
-
-
-            {
-                activePage === "map" && isPressed === false && <aside className="sidebar text-light text-uppercase">
-                    {iconInfos.map((icon, i) => {
-                        return (
-                            <a
-                                key={i}
-                                className="text-reset"
-                                onMouseOver={() => setIsHover(true)}
-                                onMouseOut={() => setIsHover(false)}
-                                href={icon.url}
-                            >
-                                {icon.component}
-                            </a>)
-                    })}
-                    <h2>Solar system</h2>
-                </aside >
-            }
-
+            <footer className="footer">
+                Ruben KABANGA MUYA © {new Date().getFullYear()} All Rights Reserved.
+            </footer>
 
         </div >
     )
