@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PFP from "./img/pfp.jpg"
 import DevIcon from "devicon-react-svg";
-import { Github, Linkedin, FileEarmarkPersonFill } from 'react-bootstrap-icons';
+import { Github, Linkedin, FileEarmarkPersonFill, EnvelopeAtFill } from 'react-bootstrap-icons';
 
 import CV from "./doc/cv.pdf";
 
@@ -16,6 +16,7 @@ const About = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
         { url: CV, component: <FileEarmarkPersonFill size={30} className="m-2" /> },
         { url: "https://github.com/aretwojay", component: <Github size={30} className="m-2" /> },
         { url: "https://www.linkedin.com/in/ruben-kabanga-muya-8ba864209/", component: <Linkedin size={30} className="m-2" /> },
+        { url: "mailto:rubenmuya9129@gmail.com", component: <EnvelopeAtFill size={30} className="m-2" /> }
     ]
 
     const sectionInfos = [
