@@ -283,7 +283,7 @@ a {
 .about {
     display: flex;
     position: relative;
-    height: 100vh;
+    height: 140vh;
     background: radial-gradient(#292b2b, #010508);
     font-weight: 600;
 }
@@ -413,6 +413,6 @@ a {
 
 @media screen and (max-width: 859px) {
     .about-container {
-        flex-direction: row;
+        flex-direction: column;
     }
 }
