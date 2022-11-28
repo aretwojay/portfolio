@@ -414,5 +414,7 @@ a {
 @media screen and (max-width: 859px) {
     .about-container {
         flex-direction: column;
+        align-items: center;
     }
+
 }
