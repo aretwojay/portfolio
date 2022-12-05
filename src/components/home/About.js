@@ -60,7 +60,7 @@ const About = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     return (
         <div className="about text-light vw-100">
             <div className="d-flex justify-content-around about-container vw-100">
-                <div className="ms-5 mb-5" style={{ Width: "350px" }}>
+                <div className="pfp-container mb-5" style={{ Width: "350px" }}>
                     <h1 className="text-uppercase mb-0">
                         Ruben KABANGA MUYA
                     </h1>
@@ -68,7 +68,7 @@ const About = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
                     <img className="pfp" src={PFP} />
                 </div>
 
-                <div className="skills ms-5 p-3">
+                <div className="skills p-3">
                     {sectionInfos.map((section, i) => {
                         return (
                             <div className="mb-5">

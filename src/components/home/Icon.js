@@ -16,10 +16,6 @@ const Icon = ({ cursorHover, project }) => {
         cursorHover(false);
     }
 
-    const redirect = (url) => {
-        window.location.href = url;
-    }
-
     return (
         <div>
             <div

@@ -215,7 +215,12 @@ a {
     background-repeat: no-repeat;
     background-size: cover;
     animation: appear 200ms linear;
-    transform: translateY(-30%)
+    transform: translateY(-30%);
+}
+
+.space .section {
+    overflow-y: hidden !important;
+
 }
 
 .middle-orbit {
@@ -232,10 +237,11 @@ a {
 }
 
 .page {
+    overflow-y: hidden !important;
     transition: all 500ms ease-in-out;
 }
 
-.page.hidden {
+.page .page.hidden {
     height: 0;
     opacity: 0;
 }
@@ -283,7 +289,7 @@ a {
 .about {
     display: flex;
     position: relative;
-    height: 140vh;
+    height: 180vh;
     background: radial-gradient(#292b2b, #010508);
     font-weight: 600;
 }
@@ -411,10 +417,28 @@ a {
     }
 }
 
-@media screen and (max-width: 859px) {
+@media screen and (max-width: 1052px) {
     .about-container {
         flex-direction: column;
         align-items: center;
+    }
+
+    .pfp-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+@media screen and (max-width: 531px) {
+    .skills {
+        max-width: 300px;
+    }
+
+    .pfp-container h1 {
+        text-align: center;
+        ;
     }
 
 }
