@@ -238,10 +238,10 @@ a {
 
 .page {
     overflow-y: hidden !important;
-    transition: all 500ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
 }
 
-.page .page.hidden {
+.page.hidden {
     height: 0;
     opacity: 0;
 }
