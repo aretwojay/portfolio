@@ -15,7 +15,7 @@ const About = ({ isPressed, setIsPressed, cursorHover, cursorPos }) => {
     const iconInfos = [
         { url: CV, component: <FileEarmarkPersonFill size={30} className="m-2" /> },
         { url: "https://github.com/aretwojay", component: <Github size={30} className="m-2" /> },
-        { url: "https://www.linkedin.com/in/ruben-kabanga-muya-8ba864209/", component: <Linkedin size={30} className="m-2" /> },
+        { url: "https://www.linkedin.com/in/rubenmuya/", component: <Linkedin size={30} className="m-2" /> },
         { url: "mailto:rubenmuya9129@gmail.com", component: <EnvelopeAtFill size={30} className="m-2" /> }
     ]
 
